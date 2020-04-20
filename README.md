@@ -92,5 +92,5 @@ The trained model wil be saved as a pickle file.
 
 ![Loss](/C9/SisFall_Loss(BF).png)
 
-As is shown in the picture, the accuracy of three features are all not very good.I thougt maybe there's something wrong with my model and I still didn't figure it out after choosing different functions and dividing the dataset in different ways. And I will keep working on it.
+As is shown in the picture, the accuracy of three features are all not very good.I thougt maybe there's something wrong with my model or the method I processed the data. Now I still didn't figure it out after choosing different functions and dividing the dataset in different ways. And I will keep working on it.
 
