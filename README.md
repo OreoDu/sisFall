@@ -17,14 +17,47 @@ The four classes I chosen:
 This process can be seen in LoadFeatures.py . 
 - Data:
 Generally, I choose the data measured by the sensor ADXL345 and convert the acceleration data into gravity, using this equation: 
+
 Acceleration [g]: [(2·Range)/(2^Resolution)]·data.
+
 According to the research, the effect of filtering is not stable and doesn't work on every features so I didn't use the filtered data before applying the features.
 
 - Feature:
 I choose threee features in the training process.(They are three of five features that best performed in the research.)
+
 C2:Sum vector magnitude on horizontal plane
+
+```
+def vectorsum (Acc_x, Acc_z):
+    x = []
+    z = []
+    x = [i*i for i in Acc_x]
+    z = [i*i for i in Acc_z]
+    sum = [a+b for a,b in zip(x,z)]
+    vectorsum_res = [math.sqrt(i) for i in sum]
+    return vectorsum_res
+```
+
 C8:Standard deviation magnitude on horizontal plane
+
+```
+def deviation0 (Acc_x, Acc_z):
+    s = [0 for _ in range(100)]
+    for i in range(100):
+        s[i] = math.sqrt(np.var(Acc_z[i:i+25]) + np.var(Acc_x[i:i+25]))
+    return s
+```
+
 C9:Standard deviation magnitude
+
+```
+def deviation1 (Acc_x, Acc_y,Acc_z):
+    s = [0 for _ in range(100)]
+    for i in range(100):
+        s[i] = math.sqrt(np.var(Acc_x[i:i+25]) + np.var(Acc_y[i:i+25])+ np.var(Acc_y[i:i+25]))
+    return s
+```
+
 The calculated data of features wil be saved as a pickle file.
 
 ### RNN model
@@ -43,10 +76,21 @@ The trained model wil be saved as a pickle file.
 ### Result
 - C2:
 
+![Accuracy](/C2/SisFall_Accuracy(BF).png)
+
+![Loss](/C2/SisFall_Loss(BF).png)
+
 - C8:
+
+![Accuracy](/C8/SisFall_Accuracy(BF).png)
+
+![Loss](/C8/SisFall_Loss(BF).png)
 
 - C9:
 
+![Accuracy](/C9/SisFall_Accuracy(BF).png)
+
+![Loss](/C9/SisFall_Loss(BF).png)
 
 
 
